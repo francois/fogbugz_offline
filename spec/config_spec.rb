@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/spec_helper"
 require "yaml"
 
-describe FogbugzOffline::GlobalConfig, "#initialize" do
+describe FogbugzOffline::Config, "#initialize" do
   before do
     YAML.stub!(:load_file).and_return(@config = {"http://my.project.com/" => []})
   end
@@ -27,7 +27,7 @@ describe FogbugzOffline::GlobalConfig, "#initialize" do
   end
 end
 
-describe FogbugzOffline::GlobalConfig, "#write" do
+describe FogbugzOffline::Config, "#write" do
   before do
     YAML.stub!(:load_file).and_return(@config = {"config" => "value"})
     @global = FogbugzOffline::GlobalConfig.new(@path = Pathname.new("config file path"))

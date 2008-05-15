@@ -1,19 +1,8 @@
+require "fogbugz_offline/config"
 require "yaml"
 
 module FogbugzOffline
-  class GlobalConfig
-    attr_reader :path, :config
-
-    def initialize(path)
-      @path = path
-
-      begin
-        @config = YAML.load_file(@path)
-      rescue SystemCallError
-        @config = Hash.new
-      end
-    end
-
+  class GlobalConfig < FogbugzOffline::Config
     def add_project(project_url)
       projects[project_url] = Array.new
     end
@@ -32,13 +21,6 @@ module FogbugzOffline
 
     def project(url)
       projects[project_url] ||= []
-    end
-
-    def write
-      @path.dirname.mkdir unless @path.dirname.directory?
-      File.open(@path, "wb") do |io|
-        YAML.dump(@config, io)
-      end
     end
   end
 end

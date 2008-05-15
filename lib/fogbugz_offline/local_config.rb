@@ -1,4 +1,4 @@
 module FogbugzOffline
-  class LocalConfig
+  class LocalConfig < FogbugzOffline::Config
   end
 end
