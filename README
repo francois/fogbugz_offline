@@ -1,4 +1,13 @@
-templates
-=================
+FogbugzOffline
+==============
 
-A plugin for the Merb framework that provides ....
+Take FogBugz offline with you, anywhere you go!
+
+With Git, and distributed version control in general, developers need a quick way to grab their working set with them.  This tool uses the FogBugz API to CRUD cases from FogBugz.  New cases are assigned temporary numbers (for local referencing), and when pushed to the central server are assigned their real case numbers.
+
+Cases can be locally managed: listed, resolved, edited, assigned, closed, reopened and searched.
+
+Alpha Notes
+===========
+
+This Gem is strictly alpha quality: most commands are not implemented.
