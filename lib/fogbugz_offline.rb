@@ -16,4 +16,16 @@ module FogbugzOffline
       super("You have never logged in to #{url}.\n  fogbugz_offline login --email you@yourdomain.com --password thepassword #{url}\n\nwill generate a token for you.")
     end
   end
+
+  class NoApiAtLocation < RuntimeError
+    def initialize(url)
+      super("The URL #{url} does not seem to be a valid FogBugz install.")
+    end
+  end
+
+  class InvalidApiResponse < RuntimeError
+    def initialize(url, response)
+      super("The URL #{url} returned an unpexected response: I expected XML, I got:\n#{response}")
+    end
+  end
 end
