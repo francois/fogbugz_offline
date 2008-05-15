@@ -28,3 +28,18 @@ describe FogbugzOffline, "#home_path" do
     lambda { FogbugzOffline.home_path }.should raise_error(ArgumentError)
   end
 end
+
+describe FogbugzOffline, "#project_path" do
+  before do
+    Dir.stub!(:getwd).and_return("/home/me/project")
+  end
+
+  it "should instantiate a Pathname object" do
+    Pathname.should_receive(:new).with(Dir.getwd).and_return(mock("pathname"))
+    FogbugzOffline.project_path
+  end
+
+  it "should return a Pathname on the current working directory" do
+    FogbugzOffline.project_path.should == Pathname.new(Dir.getwd)
+  end
+end
