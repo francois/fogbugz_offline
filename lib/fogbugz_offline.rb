@@ -7,7 +7,7 @@ module FogbugzOffline
     FogbugzOffline::Config.instance
   end
 
-  def self.connect_to(url)
+  def self.connection_to(url)
     FogbugzOffline::Connection.new(url)
   end
 

@@ -11,11 +11,11 @@ describe FogbugzOffline::Commands::Init do
     FogbugzOffline.stub!(:local).and_return(@local_config = stub_everything("local config"))
     @local_config.stub!(:write).and_return(true)
 
-    FogbugzOffline.stub!(:connect_to).and_return(@connection = stub_everything("connection"))
+    FogbugzOffline.stub!(:connection_to).and_return(@connection = stub_everything("connection"))
   end
 
   it "should validate the project's URL against the live server" do
-    FogbugzOffline.should_receive(:connect_to).with("http://fogbugz.my-project.com/").and_return(@connection)
+    FogbugzOffline.should_receive(:connection_to).with("http://fogbugz.my-project.com/").and_return(@connection)
     @connection.should_receive(:validate!)
     @init.run("http://fogbugz.my-project.com/")
   end

@@ -2,7 +2,7 @@ module FogbugzOffline
   module Commands
     class Init
       def run(url)
-        FogbugzOffline.connect_to(url).validate!
+        FogbugzOffline.connection_to(url).validate!
 
         FogbugzOffline.global.add_project(url)
         FogbugzOffline.global.write
