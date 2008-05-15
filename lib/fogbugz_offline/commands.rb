@@ -5,5 +5,9 @@ module FogbugzOffline
     def self.init(*args)
       FogbugzOffline::Commands::Init.new.run(*args)
     end
+
+    def self.login(*args)
+      FogbugzOffline::Commands::Login.new.run(*args)
+    end
   end
 end

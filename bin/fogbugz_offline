@@ -22,4 +22,19 @@ Main {
       puts "Initialized #{url}"
     end
   end
+
+  mode("login") do
+    argument("url") { required; argument_required; cast :uri }
+    def url; params["url"].value; end
+
+    option("email") { required; argument_required }
+    def email; params["email"].value; end
+
+    option("password") { required; argument_required }
+    def password; params["password"].value; end
+
+    def run
+      FogbugzOffline::Commands.login(:url => url, :email => email, :password => password)
+    end
+  end
 }
