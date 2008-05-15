@@ -43,3 +43,25 @@ describe FogbugzOffline, "#project_path" do
     FogbugzOffline.project_path.should == Pathname.new(Dir.getwd)
   end
 end
+
+describe FogbugzOffline, "#global" do
+  before do
+    FogbugzOffline.stub!(:home_path).and_return(Pathname.new("/home/me"))
+  end
+
+  it "should instantiate a FogbugzOffline::GlobalConfig with #home_path + .fogbugz_offline/config.yml" do
+    FogbugzOffline::GlobalConfig.should_receive(:new).with(Pathname.new("/home/me/.fogbugz_offline/config.yml")).and_return(mock("config"))
+    FogbugzOffline.global
+  end
+end
+
+describe FogbugzOffline, "#local" do
+  before do
+    FogbugzOffline.stub!(:project_path).and_return(Pathname.new("/home/me/project"))
+  end
+
+  it "should instantiate a FogbugzOffline::LocalConfig with #project_path + .fogbugz_offline/config.yml" do
+    FogbugzOffline::LocalConfig.should_receive(:new).with(Pathname.new("/home/me/project/.fogbugz_offline/config.yml")).and_return(mock("config"))
+    FogbugzOffline.local
+  end
+end

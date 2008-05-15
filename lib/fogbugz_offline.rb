@@ -1,4 +1,5 @@
-require "fogbugz_offline/config"
+require "fogbugz_offline/global_config"
+require "fogbugz_offline/local_config"
 require "fogbugz_offline/connection"
 require "fogbugz_offline/commands"
 
@@ -18,11 +19,13 @@ module FogbugzOffline
   end
 
   def self.global
-    FogbugzOffline::Config.new(home_path + ".fogbugz_offline/config.yml")
+    return @global_config if @global_config
+    @global_config = FogbugzOffline::GlobalConfig.new(home_path + ".fogbugz_offline/config.yml")
   end
 
   def self.local
-    FogbugzOffline::Config.new(project_path + ".fogbugz_offline/config.yml")
+    return @local_config if @local_config
+    FogbugzOffline::LocalConfig.new(project_path + ".fogbugz_offline/config.yml")
   end
 
   def self.connection_to(url)
