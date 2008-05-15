@@ -1,1 +1,25 @@
 #!/usr/bin/env ruby
+
+require "rubygems"
+require "main"
+
+$:.unshift File.dirname(__FILE__) + "/../lib"
+require "fogbugz_offline"
+
+Main {
+  mode("init") do
+    argument("url") { required; argument_required; cast :uri }
+    def url; params["url"].value; end
+
+    def run
+      begin
+        FogbugzOffline::Commands.init(url)
+      rescue FogbugzOffline::NoValidToken
+        puts $!.message
+        puts
+      end
+
+      puts "Initialized #{url}"
+    end
+  end
+}
