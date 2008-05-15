@@ -37,3 +37,11 @@ end
 task :install => [:package] do
   sh %{sudo gem install pkg/#{GEM}-#{VERSION}}
 end
+
+require "spec/rake/spectask"
+Spec::Rake::SpecTask.new do |t|
+  t.warning = false
+  t.rcov = false
+end
+
+task :default => :spec
